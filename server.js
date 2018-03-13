@@ -2,7 +2,7 @@ const express = require('express')
 const server = express()
 const volumes = require('./volumes')
 
-server.use("/", express.static(__dirname + '/'))
+server.use("/", express.static(__dirname + '/public'))
 
 
 server.get('/:shape', function(req, res) {
@@ -31,12 +31,12 @@ server.get('/:shape', function(req, res) {
   if (!isNaN(result)){
     res.json(result)
   } else {
-    res.status(501).send('volume calculation result was not a number');
+    res.status(501).send('Volume calculation result was not a number');
   }
   
 });
 
 
 server.listen(7777, function() {
-  console.log('App started');
+  console.log('Hello, master! I\'m ready to serve you')
 });
