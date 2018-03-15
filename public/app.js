@@ -1,11 +1,9 @@
 $(document).ready(function() {
-	
-	function calcVolumes() {
 
 		$('.dropdown-menu > button').on('click', function(event){
 			// remove all the inputs from the previous dropdown selection
 			$('.form-inline').remove()
-			$('#result > h6').remove()
+			$('#result').text('')
 
 			// show shape's name in dropdown
 			var selText = $(this).text()
@@ -17,7 +15,6 @@ $(document).ready(function() {
 			$('#inputs').append($form)
 			disableDefault(shape)
 		})
-
 
 		function disableDefault(shape){
 			$('#calculate').on('click', function(event){
@@ -40,7 +37,6 @@ $(document).ready(function() {
 			runQuery(url)
 		}
 
-
 		function runQuery(url){
 			$.ajax({
 				url: url,
@@ -53,17 +49,19 @@ $(document).ready(function() {
 				}
 			});
 		}
-
+	
+		var $result = $('#result')
+				
 		function visualiseResult(data){
-			var $outcome = $('<h6>The volume equals: '+ data.toFixed(2) +'</h6>')
-			$('#result').append($outcome)
+			var $outcome = "The volume equals: "+ data.toFixed(2) 
+			$result.css("color", "black")
+						 .text($outcome)
 		}
 
 		function apologise(){
-			var $fail = $('<h6 style="color:red">I&#39;m sorry, I could not calculate</h6>')
-			$('#result').append($fail)
+			var $fail = "I'm sorry, I could not calculate"
+			$result.css("color", "red")
+							.text($fail)
 		}
-	}
 
-	calcVolumes();
 });
